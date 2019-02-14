@@ -4,6 +4,9 @@ import { Text, View, StyleSheet, Button } from 'react-native';
 import call from 'react-native-phone-call';
 
 export default class App extends React.Component {
+  static navigationOptions = {
+    title: 'Emergency Rental Page',
+  };
   call = () => {
     //handler to make a call
     const args = {
@@ -27,6 +30,6 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#ffffff',
+    backgroundColor: '#C3DEE2',
   },
 });

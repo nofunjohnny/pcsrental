@@ -7,6 +7,9 @@ import Polyline from '@mapbox/polyline';
 
 
 class LocationA extends Component {
+  static navigationOptions = {
+    title: 'Get Directions',
+  };
   constructor(props) {
     super(props);
 

@@ -24,10 +24,11 @@ public class AppConstants {
     List<Constants.EmbeddedResponse> embeddedResponses = new ArrayList<>();
 
     
+        
         // ADD EMBEDDED RESPONSES HERE
         // START EMBEDDED RESPONSES
         embeddedResponses.add(new Constants.EmbeddedResponse("https://exp.host/@organizedkhaos/pcsrental", "assets://shell-app-manifest.json", "application/json"));
-        embeddedResponses.add(new Constants.EmbeddedResponse("https://d1wp6m56sqw74a.cloudfront.net/%40organizedkhaos%2Fpcsrental%2F1.0.0%2F502492065a5522ea7e82b354db575f6e-32.0.0-android.js", "assets://shell-app.bundle", "application/javascript"));
+        embeddedResponses.add(new Constants.EmbeddedResponse("https://d1wp6m56sqw74a.cloudfront.net/%40organizedkhaos%2Fpcsrental%2F1.0.0%2F57198d371d75db3a5a97a682a5eb021d-32.0.0-android.js", "assets://shell-app.bundle", "application/javascript"));
         // END EMBEDDED RESPONSES
     EMBEDDED_RESPONSES = embeddedResponses;
   }

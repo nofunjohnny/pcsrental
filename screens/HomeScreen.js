@@ -35,10 +35,10 @@ export default class HomeScreen extends React.Component {
           <View style={styles.getStartedContainer}>
             {this._maybeRenderDevelopmentModeWarning()}
 
-            <Text style={styles.getStartedText}>Get started by opening</Text>
+            <Text style={styles.getStartedText}>Welcome to the Home Page</Text>
 
             <View style={[styles.codeHighlightContainer, styles.homeScreenFilename]}>
-              <MonoText style={styles.codeHighlightText}>screens/HomeScreen.js</MonoText>
+              <MonoText style={styles.codeHighlightText}>This is Highlighted Text</MonoText>
             </View>
 
             <Text style={styles.getStartedText}>
@@ -48,7 +48,7 @@ export default class HomeScreen extends React.Component {
 
           <View style={styles.helpContainer}>
             <TouchableOpacity onPress={this._handleHelpPress} style={styles.helpLink}>
-              <Text style={styles.helpLinkText}>Help, it didn’t automatically reload!</Text>
+              <Text style={styles.helpLinkText}>This is a link </Text>
             </TouchableOpacity>
           </View>
         </ScrollView>
@@ -101,11 +101,11 @@ export default class HomeScreen extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#C3DEE2',
   },
   developmentModeText: {
     marginBottom: 20,
-    color: 'rgba(0,0,0,0.4)',
+    color: '#C3DEE2',
     fontSize: 14,
     lineHeight: 19,
     textAlign: 'center',
