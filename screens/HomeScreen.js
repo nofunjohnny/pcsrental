@@ -9,49 +9,67 @@ import {
   View,
 } from 'react-native';
 import { WebBrowser } from 'expo';
-
 import { MonoText } from '../components/StyledText';
+import call from "react-native-phone-call";
 
 export default class HomeScreen extends React.Component {
   static navigationOptions = {
     title: 'Welcome to Portable Cooling',
   };
+  call = () => {
+    //handler to make a call
+    const args = {
+      number: "7136617077",
+      prompt: false
+    };
 
+    call(args).catch(console.error);
+  };
   render() {
     return (
+      
       <View style={styles.container}>
+      
         <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
           <View style={styles.welcomeContainer}>
-            <Image
-              source={
-                __DEV__
-                  ? require('../assets/images/NavLogo.png')
-                  : require('../assets/images/robot-prod.png')
-              }
-              style={styles.welcomeImage}
-            />
+          <TouchableOpacity
+        style={styles.welcomeImage}
+        onPress={this.call}
+        ><Image
+        source={
+          __DEV__
+            ? require("../assets/images/hotline.png")
+            : require("../assets/images/hotline.png")
+        }
+        style={styles.welcomeImage}
+      /></TouchableOpacity>
           </View>
-
+              
           <View style={styles.getStartedContainer}>
-            {this._maybeRenderDevelopmentModeWarning()}
-
-            <Text style={styles.getStartedText}>Welcome to the Home Page</Text>
-
-            <View style={[styles.codeHighlightContainer, styles.homeScreenFilename]}>
-              <MonoText style={styles.codeHighlightText}>This is Highlighted Text</MonoText>
+          <TouchableOpacity
+        style={styles.rentalImage}
+        onPress={this.call}
+        ><Image
+        source={
+          __DEV__
+            ? require("../assets/images/rentalsicon.png")
+            : require("../assets/images/rentalsicon.png")
+        }
+        style={styles.rentalImage}
+      /></TouchableOpacity>
             </View>
-
+              
             <Text style={styles.getStartedText}>
               Change this text and your app will automatically reload.
             </Text>
-          </View>
+          </ScrollView>
 
           <View style={styles.helpContainer}>
             <TouchableOpacity onPress={this._handleHelpPress} style={styles.helpLink}>
               <Text style={styles.helpLinkText}>This is a link </Text>
             </TouchableOpacity>
           </View>
-        </ScrollView>
+        
 
         <View style={styles.tabBarInfoContainer}>
           <Text style={styles.tabBarInfoText}>This is a tab bar. You can edit it in:</Text>
@@ -101,7 +119,7 @@ export default class HomeScreen extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#C3DEE2',
+    backgroundColor: 'lightgrey',
   },
   developmentModeText: {
     marginBottom: 20,
@@ -116,18 +134,23 @@ const styles = StyleSheet.create({
   welcomeContainer: {
     alignItems: 'center',
     marginTop: 10,
-    marginBottom: 20,
+    
   },
   welcomeImage: {
-    width: 100,
-    height: 80,
+    width: 256,
+    height: 256,
     resizeMode: 'contain',
     marginTop: 3,
-    marginLeft: -10,
+    
+  },
+  rentalImage: {
+    width: 128,
+    height: 128,
+    
   },
   getStartedContainer: {
-    alignItems: 'center',
-    marginHorizontal: 50,
+    alignItems: 'left',
+    marginHorizontal: 10,
   },
   homeScreenFilename: {
     marginVertical: 7,
