@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import {
   Image,
   Platform,
@@ -6,15 +6,15 @@ import {
   StyleSheet,
   Text,
   TouchableOpacity,
-  View,
-} from 'react-native';
-import { WebBrowser } from 'expo';
-import { MonoText } from '../components/StyledText';
+  View
+} from "react-native";
+import { WebBrowser } from "expo";
+import { MonoText } from "../components/StyledText";
 import call from "react-native-phone-call";
 
 export default class HomeScreen extends React.Component {
   static navigationOptions = {
-    title: 'Welcome to Portable Cooling',
+    title: "Welcome to Portable Cooling"
   };
   call = () => {
     //handler to make a call
@@ -27,55 +27,58 @@ export default class HomeScreen extends React.Component {
   };
   render() {
     return (
-      
       <View style={styles.container}>
-      
-        <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
+        <ScrollView
+          style={styles.contentContainer}
+          contentContainerStyle={styles.contentContainer}
+        >
           <View style={styles.welcomeContainer}>
-          <TouchableOpacity
-        style={styles.welcomeImage}
-        onPress={this.call}
-        ><Image
-        source={
-          __DEV__
-            ? require("../assets/images/hotline.png")
-            : require("../assets/images/hotline.png")
-        }
-        style={styles.welcomeImage}
-      /></TouchableOpacity>
-          </View>
-              
-          <View style={styles.getStartedContainer}>
-          <TouchableOpacity
-        style={styles.rentalImage}
-        onPress={this.call}
-        ><Image
-        source={
-          __DEV__
-            ? require("../assets/images/rentalsicon.png")
-            : require("../assets/images/rentalsicon.png")
-        }
-        style={styles.rentalImage}
-      /></TouchableOpacity>
-            </View>
-              
-            <Text style={styles.getStartedText}>
-              Change this text and your app will automatically reload.
-            </Text>
-          </ScrollView>
-
-          <View style={styles.helpContainer}>
-            <TouchableOpacity onPress={this._handleHelpPress} style={styles.helpLink}>
-              <Text style={styles.helpLinkText}>This is a link </Text>
+            <TouchableOpacity style={styles.welcomeImage} onPress={this.call}>
+              <Image
+                source={
+                  __DEV__
+                    ? require("../assets/images/hotline.png")
+                    : require("../assets/images/hotline.png")
+                }
+                style={styles.welcomeImage}
+              />
             </TouchableOpacity>
           </View>
-        
+
+          <View style={styles.getStartedContainer}>
+            <TouchableOpacity style={styles.rentalImage} onPress={this.call}>
+              <Image
+                source={
+                  __DEV__
+                    ? require("../assets/images/rentalsicon.png")
+                    : require("../assets/images/rentalsicon.png")
+                }
+                style={styles.rentalImage}
+              />
+            </TouchableOpacity>
+          </View>
+        </ScrollView>
+
+        <View style={styles.helpContainer}>
+          <TouchableOpacity
+            onPress={this._handleHelpPress}
+            style={styles.helpLink}
+          >
+            <Text style={styles.helpLinkText}>This is a link </Text>
+          </TouchableOpacity>
+        </View>
 
         <View style={styles.tabBarInfoContainer}>
-          <Text style={styles.tabBarInfoText}>This is a tab bar. You can edit it in:</Text>
+          <Text style={styles.tabBarInfoText}>
+            This is a tab bar. You can edit it in:
+          </Text>
 
-          <View style={[styles.codeHighlightContainer, styles.navigationFilename]}>
-            <MonoText style={styles.codeHighlightText}>navigation/MainTabNavigator.js</MonoText>
+          <View
+            style={[styles.codeHighlightContainer, styles.navigationFilename]}
+          >
+            <MonoText style={styles.codeHighlightText}>
+              navigation/MainTabNavigator.js
+            </MonoText>
           </View>
         </View>
       </View>
@@ -92,8 +95,8 @@ export default class HomeScreen extends React.Component {
 
       return (
         <Text style={styles.developmentModeText}>
-          Development mode is enabled, your app will be slower but you can use useful development
-          tools. {learnMoreButton}
+          Development mode is enabled, your app will be slower but you can use
+          useful development tools. {learnMoreButton}
         </Text>
       );
     } else {
@@ -106,12 +109,14 @@ export default class HomeScreen extends React.Component {
   }
 
   _handleLearnMorePress = () => {
-    WebBrowser.openBrowserAsync('https://docs.expo.io/versions/latest/guides/development-mode');
+    WebBrowser.openBrowserAsync(
+      "https://docs.expo.io/versions/latest/guides/development-mode"
+    );
   };
 
   _handleHelpPress = () => {
     WebBrowser.openBrowserAsync(
-      'https://docs.expo.io/versions/latest/guides/up-and-running.html#can-t-see-your-changes'
+      "https://docs.expo.io/versions/latest/guides/up-and-running.html#can-t-see-your-changes"
     );
   };
 }
@@ -119,93 +124,90 @@ export default class HomeScreen extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'lightgrey',
+    backgroundColor: "lightgrey"
   },
   developmentModeText: {
     marginBottom: 20,
-    color: '#C3DEE2',
+    color: "#C3DEE2",
     fontSize: 14,
     lineHeight: 19,
-    textAlign: 'center',
+    textAlign: "center"
   },
   contentContainer: {
-    paddingTop: 30,
+    paddingTop: 30
   },
   welcomeContainer: {
-    alignItems: 'center',
-    marginTop: 10,
-    
+    alignItems: "center",
+    marginTop: 10
   },
   welcomeImage: {
     width: 256,
     height: 256,
-    resizeMode: 'contain',
-    marginTop: 3,
-    
+    resizeMode: "contain",
+    marginTop: 3
   },
   rentalImage: {
     width: 128,
-    height: 128,
-    
+    height: 128
   },
   getStartedContainer: {
-    alignItems: 'left',
-    marginHorizontal: 10,
+    alignItems: "left",
+    marginHorizontal: 10
   },
   homeScreenFilename: {
-    marginVertical: 7,
+    marginVertical: 7
   },
   codeHighlightText: {
-    color: 'rgba(96,100,109, 0.8)',
+    color: "rgba(96,100,109, 0.8)"
   },
   codeHighlightContainer: {
-    backgroundColor: 'rgba(0,0,0,0.05)',
+    backgroundColor: "rgba(0,0,0,0.05)",
     borderRadius: 3,
-    paddingHorizontal: 4,
+    paddingHorizontal: 4
   },
   getStartedText: {
     fontSize: 17,
-    color: 'rgba(96,100,109, 1)',
+    color: "rgba(96,100,109, 1)",
     lineHeight: 24,
-    textAlign: 'center',
+    textAlign: "center"
   },
   tabBarInfoContainer: {
-    position: 'absolute',
+    position: "absolute",
     bottom: 0,
     left: 0,
     right: 0,
     ...Platform.select({
       ios: {
-        shadowColor: 'black',
+        shadowColor: "black",
         shadowOffset: { height: -3 },
         shadowOpacity: 0.1,
-        shadowRadius: 3,
+        shadowRadius: 3
       },
       android: {
-        elevation: 20,
-      },
+        elevation: 20
+      }
     }),
-    alignItems: 'center',
-    backgroundColor: '#fbfbfb',
-    paddingVertical: 20,
+    alignItems: "center",
+    backgroundColor: "#fbfbfb",
+    paddingVertical: 20
   },
   tabBarInfoText: {
     fontSize: 17,
-    color: 'rgba(96,100,109, 1)',
-    textAlign: 'center',
+    color: "rgba(96,100,109, 1)",
+    textAlign: "center"
   },
   navigationFilename: {
-    marginTop: 5,
+    marginTop: 5
   },
   helpContainer: {
     marginTop: 15,
-    alignItems: 'center',
+    alignItems: "center"
   },
   helpLink: {
-    paddingVertical: 15,
+    paddingVertical: 15
   },
   helpLinkText: {
     fontSize: 14,
-    color: '#2e78b7',
-  },
+    color: "#2e78b7"
+  }
 });
