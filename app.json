@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "react-native-elements-app",
-    "slug": "react-native-elements-app",
+    "name": "pcsrental",
+    "slug": "pcsrental",
     "description": "A demo app for React Native Elements UI Library",
     "privacy": "public",
     "sdkVersion": "31.0.0",
