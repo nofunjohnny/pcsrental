@@ -1,62 +1,135 @@
 import React from 'react';
-import { Platform, StatusBar, StyleSheet, View } from 'react-native';
-import { AppLoading, Asset, Font, Icon } from 'expo';
-import AppNavigator from './navigation/AppNavigator';
+import { registerRootComponent, AppLoading, Asset, Font } from 'expo';
+import { FontAwesome, Ionicons } from '@expo/vector-icons';
+import { View, Image, Dimensions } from 'react-native';
+import { DrawerNavigator, DrawerItems } from 'react-navigation';
 
-export default class App extends React.Component {
-  state = {
-    isLoadingComplete: false,
-  };
+import Components from './src/drawer/components';
+import Ratings from './src/drawer/ratings';
+import Pricing from './src/drawer/pricing';
+import Login from './src/drawer/login';
+import Profile from './src/drawer/profile';
+import Lists from './src/drawer/lists';
+import Settings from './src/drawer/settings';
 
-  render() {
-    if (!this.state.isLoadingComplete && !this.props.skipLoadingScreen) {
-      return (
-        <AppLoading
-          startAsync={this._loadResourcesAsync}
-          onError={this._handleLoadingError}
-          onFinish={this._handleFinishLoading}
-        />
-      );
-    } else {
-      return (
-        <View style={styles.container}>
-          {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
-          <AppNavigator />
-        </View>
-      );
-    }
+const SCREEN_WIDTH = Dimensions.get('window').width;
+
+const CustomDrawerContentComponent = props => (
+  <View style={{ flex: 1, backgroundColor: '#43484d' }}>
+    <View
+      style={{ marginTop: 40, justifyContent: 'center', alignItems: 'center' }}
+    >
+      <Image
+        source={require('./src/images/logo.png')}
+        style={{ width: SCREEN_WIDTH * 0.57 }}
+        resizeMode="contain"
+      />
+    </View>
+    <View style={{ marginLeft: 10 }}>
+      <DrawerItems {...props} />
+    </View>
+  </View>
+);
+
+const MainRoot = DrawerNavigator(
+  {
+    Login: {
+      path: '/login',
+      screen: Login,
+    },
+    Profile: {
+      path: '/profile',
+      screen: Profile,
+    },
+    Lists: {
+      path: '/lists',
+      screen: Lists,
+    },
+    Components: {
+      path: '/components',
+      screen: Components,
+    },
+    Ratings: {
+      path: '/ratings',
+      screen: Ratings,
+    },
+    Pricing: {
+      path: '/pricing',
+      screen: Pricing,
+    },
+    Settings: {
+      path: '/settings',
+      screen: Settings,
+    },
+  },
+  {
+    initialRouteName: 'Components',
+    contentOptions: {
+      activeTintColor: '#548ff7',
+      activeBackgroundColor: 'transparent',
+      inactiveTintColor: '#ffffff',
+      inactiveBackgroundColor: 'transparent',
+      labelStyle: {
+        fontSize: 15,
+        marginLeft: 0,
+      },
+    },
+    drawerWidth: SCREEN_WIDTH * 0.8,
+    contentComponent: CustomDrawerContentComponent,
+    drawerOpenRoute: 'DrawerOpen',
+    drawerCloseRoute: 'DrawerClose',
+    drawerToggleRoute: 'DrawerToggle',
   }
+);
 
-  _loadResourcesAsync = async () => {
-    return Promise.all([
-      Asset.loadAsync([
-        require('./assets/images/NavLogo.png'),
-        require('./assets/images/robot-prod.png'),
-      ]),
-      Font.loadAsync({
-        // This is the font that we are using for our tab bar
-        ...Icon.Ionicons.font,
-        // We include SpaceMono because we use it in HomeScreen.js. Feel free
-        // to remove this if you are not using it in your app
-        'space-mono': require('./assets/fonts/SpaceMono-Regular.ttf'),
-      }),
-    ]);
-  };
-
-  _handleLoadingError = error => {
-    // In this case, you might want to report the error to your error
-    // reporting service, for example Sentry
-    console.warn(error);
-  };
-
-  _handleFinishLoading = () => {
-    this.setState({ isLoadingComplete: true });
-  };
+function cacheImages(images) {
+  return images.map(image => {
+    if (typeof image === 'string') {
+      return Image.prefetch(image);
+    } else {
+      return Asset.fromModule(image).downloadAsync();
+    }
+  });
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-  },
-});
+function cacheFonts(fonts) {
+  return fonts.map(font => Font.loadAsync(font));
+}
+
+export default class AppContainer extends React.Component {
+  state = {
+    isReady: false,
+  };
+
+  async _loadAssetsAsync() {
+    const imageAssets = cacheImages([
+      require('./assets/images/bg_screen1.jpg'),
+      require('./assets/images/bg_screen2.jpg'),
+      require('./assets/images/bg_screen3.jpg'),
+      require('./assets/images/bg_screen4.jpg'),
+      require('./assets/images/user-cool.png'),
+      require('./assets/images/user-hp.png'),
+      require('./assets/images/user-student.png'),
+      require('./assets/images/avatar1.jpg'),
+    ]);
+
+    const fontAssets = cacheFonts([FontAwesome.font, Ionicons.font]);
+
+    await Promise.all([...imageAssets, ...fontAssets]);
+  }
+
+  render() {
+    if (!this.state.isReady) {
+      return (
+        <AppLoading
+          startAsync={this._loadAssetsAsync}
+          onFinish={() => this.setState({ isReady: true })}
+        />
+      );
+    }
+
+    return <MainRoot />;
+  }
+}
+
+registerRootComponent(AppContainer);
